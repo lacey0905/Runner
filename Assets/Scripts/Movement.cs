@@ -10,9 +10,11 @@ public class Movement : MonoBehaviour
     bool isLeft = true;
 
     Quaternion newRot;
+    Animator anim;
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         newRot = Quaternion.LookRotation(transform.forward);
     }
 
@@ -31,6 +33,10 @@ public class Movement : MonoBehaviour
                 newRot = Quaternion.LookRotation(Vector3.forward);
                 isLeft = true;
             }
+        }
+        else if(Input.GetMouseButtonDown(1))
+        {
+            anim.SetTrigger("Jump 0");
         }
 
         transform.position += transform.forward * speed * Time.deltaTime;

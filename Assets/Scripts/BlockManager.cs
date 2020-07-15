@@ -27,17 +27,17 @@ public class BlockManager : MonoBehaviour
     {
         SpawnBlock(0);
         SpawnBlock(0);
+        SpawnBlock(3);
+        SpawnBlock(3);
         SpawnBlock(1);
-        SpawnBlock(1);
-        SpawnBlock(0);
     }
 
     void p2()
     {
+        SpawnBlock(2);
+        SpawnBlock(2);
         SpawnBlock(1);
-        SpawnBlock(1);
-        SpawnBlock(1);
-        SpawnBlock(1);
+        SpawnBlock(3);
         SpawnBlock(0);
     }
 
