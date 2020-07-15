@@ -18,34 +18,45 @@ public class RunnerManager : MonoBehaviour
     public List<RunnerFSM> stateList = new List<RunnerFSM>();
     Dictionary<int, RunnerFSM> stateDic = new Dictionary<int, RunnerFSM>();
 
-    RunnerAnimation anim;
-    public Animator animator { get { return anim.GetAnimator(); } }
+    public List<GameObject> models = new List<GameObject>();
+
+    [HideInInspector] public Animator animator;
 
     bool isStart = false;
+    [HideInInspector] public bool isFalling = false;
 
+    public float moveSpeed;
+    public float turnSpeed;
 
-    public bool isFalling = false;
+    GameObject currentModel = null;
 
+    public void ChangeModel(int _model)
+    {
+        if (currentModel != null)
+        {
+            currentModel.SetActive(false);
+            models[_model].SetActive(true);
+        }
+        models[_model].SetActive(true);
+        currentModel = models[_model];
+        animator = models[_model].GetComponent<Animator>();
+    }
 
-    private Vector3 currentDirection;
+    private Vector3 currentDirection = Vector3.forward;
     public Vector3 Direction
     {
-        get
-        {
-            return currentDirection;
-        }
-        set
-        {
-            currentDirection = value;
-        }
+        get { return currentDirection; }
+        set { currentDirection = value; }
     }
+
+    public Rigidbody rigidbody;
 
     private void Awake()
     {
-        anim = GetComponent<RunnerAnimation>();
-        anim.ChangeModel(0);
-        Direction = Vector3.forward;
 
+        rigidbody = GetComponent<Rigidbody>();
+
+        ChangeModel(0);
         for (int i = 0; i < stateList.Count; i++)
         {
             stateDic.Add(i, stateList[i]);
@@ -56,6 +67,11 @@ public class RunnerManager : MonoBehaviour
     private void Update()
     {
         stateDic[(int)currentState].OnUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        stateDic[(int)currentState].OnFixedUpdate();
     }
 
     public void SetState(State newState)
@@ -85,6 +101,40 @@ public class RunnerManager : MonoBehaviour
             Debug.DrawRay(origin, dir * 1000f, Color.yellow);
         }
         return isHit;
+    }
+
+    public void Run()
+    {
+        //transform.position += Direction * moveSpeed * Time.deltaTime;
+        rigidbody.MovePosition(transform.position + Direction * moveSpeed * Time.deltaTime);
+    }
+
+    public void Turn()
+    {
+        Quaternion newRot = Quaternion.LookRotation(Direction);
+        rigidbody.rotation = Quaternion.Slerp(transform.rotation, newRot, turnSpeed * Time.deltaTime);
+    }
+
+    [Range(0f, 5f)]
+    public float groundRayRange;
+    [Range(0f, 0.5f)]
+    public float edgeRayRange;
+
+    public bool GroundCheck()
+    {
+        bool p1 = DrawRayCast(transform.position - Vector3.forward * groundRayRange, -Vector3.up);
+        bool p2 = DrawRayCast(transform.position + Vector3.forward * groundRayRange, -Vector3.up);
+        bool p3 = DrawRayCast(transform.position + Vector3.right * groundRayRange, -Vector3.up);
+        bool p4 = DrawRayCast(transform.position - Vector3.right * groundRayRange, -Vector3.up);
+        return p1 || p2 || p3 || p4;
+    }
+
+    public bool EdgeCheck()
+    {
+        Vector3 dir = Direction != Vector3.forward ? Vector3.forward : Vector3.right;
+        bool p1 = DrawRayCast(transform.position - dir * edgeRayRange, -Vector3.up);
+        bool p2 = DrawRayCast(transform.position + dir * edgeRayRange, -Vector3.up);
+        return p1 && p2;
     }
 
 }

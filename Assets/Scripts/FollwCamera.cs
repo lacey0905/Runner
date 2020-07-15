@@ -7,7 +7,7 @@ public class FollwCamera : MonoBehaviour
     public Transform target;
     public float speed;
 
-    void Update()
+    void FixedUpdate()
     {
         bool isFalling = target.GetComponent<RunnerManager>().isFalling;
         if(!isFalling)

@@ -19,4 +19,5 @@ public class RunnerFSM : MonoBehaviour
         this.manager = _manager;
     }
     public virtual void OnUpdate() { }
+    public virtual void OnFixedUpdate() { }
 }
