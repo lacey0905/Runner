@@ -5,6 +5,11 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
 
-    public Transform head;
-    public Transform tail;
+    public Transform front;
+
+    public Vector3 GetFrontPos()
+    {
+        return front.transform.position;
+    }
+
 }

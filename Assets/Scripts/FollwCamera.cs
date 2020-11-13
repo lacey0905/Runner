@@ -9,10 +9,6 @@ public class FollwCamera : MonoBehaviour
 
     void FixedUpdate()
     {
-        bool isFalling = target.GetComponent<RunnerManager>().isFalling;
-        if(!isFalling)
-        {
-            transform.position = Vector3.Lerp(transform.position, target.transform.position, speed * Time.deltaTime);
-        }
+        transform.position = Vector3.Lerp(transform.position, target.transform.position, speed * Time.deltaTime);
     }
 }

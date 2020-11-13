@@ -5,52 +5,28 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour
 {
 
-    public List<Block> blocks = new List<Block>();
+    public List<Block> statirsList = new List<Block>();
+    Block currentStatirs = null;
 
-    Block currentBlock = null;
+    int[] maps = new int[] { 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1 };
 
-    void Start()
+    private void Start()
     {
-        p1();
-        p2();
-        p2();
-        p2();
-        p2();
-        p1();
-        p1();
-        p1();
-        p1();
-        p1();
-    }
 
-    void p1()
-    {
-        SpawnBlock(0);
-        SpawnBlock(0);
-        SpawnBlock(3);
-        SpawnBlock(3);
-        SpawnBlock(1);
-    }
-
-    void p2()
-    {
-        SpawnBlock(2);
-        SpawnBlock(2);
-        SpawnBlock(1);
-        SpawnBlock(3);
-        SpawnBlock(0);
-    }
-
-    void SpawnBlock(int num)
-    {
-        if(currentBlock == null)
+        for (int i = 0; i < maps.Length; i++)
         {
-            currentBlock = Instantiate(blocks[num], Vector3.zero, Quaternion.identity) as Block;
+            if (currentStatirs == null)
+            {
+                currentStatirs = Instantiate(statirsList[maps[i]], transform.position, Quaternion.identity) as Block;
+            }
+            else
+            {
+                currentStatirs = Instantiate(statirsList[maps[i]], currentStatirs.GetFrontPos(), Quaternion.identity) as Block;
+            }
         }
-        else
-        {
-            currentBlock = Instantiate(blocks[num], currentBlock.head.position, Quaternion.identity) as Block;
-        }
+
+        
+        
     }
 
 }
