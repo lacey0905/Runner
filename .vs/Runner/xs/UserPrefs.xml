@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{64E2F6C6-1576-AED7-02C5-6D94F5E99C09}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Runner/RunnerFSM.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Runner/RunnerManager.cs" Line="75" Column="6" />
+      <File FileName="Assets/Scripts/Runner/RunnerFSMRun.cs" Line="5" Column="34" />
+      <File FileName="Assets/Scripts/Runner/RunnerFSMJump.cs" Line="19" Column="49" />
+      <File FileName="Assets/Scripts/FollwCamera.cs" Line="10" Column="10" />
+      <File FileName="Assets/Scripts/Runner/RunnerFSM.cs" Line="9" Column="6" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Runner" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="Runner" expanded="True" selected="True" />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="275325fc-d213-41aa-8e32-f0b3a2198ea2" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
